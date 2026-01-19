@@ -1,4 +1,4 @@
-package Practical_Session_01.Ex4;
+package practical_session_01.ex4;
 
 import java.util.Scanner;
 
