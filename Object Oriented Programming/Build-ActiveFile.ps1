@@ -11,6 +11,7 @@ if (-not $ActiveFilePath){
 
 $root = ${PSScriptRoot}
 $buildPath = Join-Path $root "bin"
+$srcPath = Join-Path $root "src"
 
 New-Item -ItemType Directory -Force -Path $buildPath | Out-Null
 
@@ -22,7 +23,7 @@ $cls  = [IO.Path]::GetFileNameWithoutExtension($ActiveFilePath)
 $fqcn = if ($pkg) { "$pkg.$cls" } else { $cls }
 
 Write-Host "Compiling: $ActiveFilePath"
-& javac -encoding UTF-8 -d $buildPath $ActiveFilePath
+& javac -encoding UTF-8 -d $buildPath -sourcepath $srcPath -cp $buildPath $ActiveFilePath
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "Running: $fqcn"
