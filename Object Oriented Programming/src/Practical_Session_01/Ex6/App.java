@@ -1,4 +1,4 @@
-package Practical_Session_01.Ex6;
+package practical_session_01.ex6;
 
 import java.util.Scanner;
 import java.util.TreeMap;
