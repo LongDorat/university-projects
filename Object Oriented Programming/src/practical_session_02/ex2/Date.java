@@ -25,31 +25,26 @@ public class Date {
 
             return true;
         }
-
+        
         return false;
     }
 
+    private int getDaysInMonth(int month) {
+        return switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 4, 6, 9, 11 -> 30;
+            case 2 -> leapYear() ? 29 : 28;
+            default -> 0;
+        };
+    }
+
     public boolean isValidDate() {
-        if (month < 1 || month > 12)
+        if (year <= 0 || month < 1 || month > 12)
             return false;
 
-        int leapDay = leapYear() ? 29 : 28;
+        int maxDays = getDaysInMonth(this.month);
 
-        switch (month) {
-            case 1, 3, 5, 7, 8, 10, 12 -> {
-                if (day < 1 || day > 31)
-                    return false;
-            }
-            case 4, 6, 9, 11 -> {
-                if (day < 1 || day > 30)
-                    return false;
-            }
-            case 2 -> {
-                if (day < 1 || day > leapDay)
-                    return false;
-            }
-        }
-        return true;
+        return (day >= 1 && day <= maxDays);
     }
 
     public void input() {
@@ -68,15 +63,6 @@ public class Date {
             }
             System.out.printf("The date is invalid! Please retype!\n");
         } while (true);
-    }
-
-    private int getDaysInMonth(int month) {
-        return switch (month) {
-            case 1, 3, 5, 7, 8, 10, 12 -> 31;
-            case 4, 6, 9, 11 -> 30;
-            case 2 -> leapYear() ? 29 : 28;
-            default -> 0;
-        };
     }
 
     public Date nextDate() {
