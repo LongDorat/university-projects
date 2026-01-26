@@ -1,5 +1,7 @@
 package practical_session_02.ex1;
 
+import java.util.Scanner;
+
 public class UsePoint {
     private static void displayPoint(Point point, String message) {
         System.out.print(message);
@@ -7,11 +9,13 @@ public class UsePoint {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         Point A = new Point(3, 4);
         displayPoint(A, "A: ");
 
         Point B = new Point();
-        B.input();
+        B.input(sc);
         displayPoint(B, "B: ");
 
         Point C = new Point(-B.getX(), -B.getY());
@@ -19,5 +23,7 @@ public class UsePoint {
 
         System.out.println("The distance between B and O: " + B.distance());
         System.out.println("The distance between A and B: " + A.distance(B));
+
+        sc.close();
     }
 }

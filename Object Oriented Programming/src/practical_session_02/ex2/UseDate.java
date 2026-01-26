@@ -1,7 +1,11 @@
 package practical_session_02.ex2;
 
+import java.util.Scanner;
+
 public class UseDate {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         // Test 1: Create a date using constructor
         System.out.println("=== Test 1: Constructor ===");
         Date date1 = new Date(28, 2, 2024);
@@ -34,9 +38,10 @@ public class UseDate {
         System.out.println("Valid: " + invalid.isValidDate());
 
         // Test 6: User input
-        // System.out.println("\n=== Test 6: User Input ===");
-        // Date userDate = new Date();
-        // userDate.input();
-        // userDate.display();
+        System.out.println("\n=== Test 6: User Input ===");
+        Date userDate = new Date();
+        userDate.input(sc);
+        userDate.display();
+        sc.close();
     }
 }

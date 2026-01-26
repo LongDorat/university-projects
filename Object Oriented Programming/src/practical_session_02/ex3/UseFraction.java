@@ -51,5 +51,7 @@ public class UseFraction {
             list[i].display();
             System.out.print(" ");
         }
+
+        sc.close();
     }
 }
