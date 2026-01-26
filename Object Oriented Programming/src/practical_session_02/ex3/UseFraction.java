@@ -27,7 +27,7 @@ public class UseFraction {
         int n;
         do {
             n = sc.nextInt();
-        } while (n > 0);
+        } while (n <= 0);
 
         Fraction[] list = new Fraction[n];
         Fraction sumList = new Fraction();
