@@ -21,11 +21,11 @@ public class Fraction {
     }
 
     public void input(Scanner sc) {
-        displayMessage("Please type in the number: ");
+        displayMessage("Number: ");
         num = sc.nextInt();
 
         do {
-            displayMessage("Please type in the denominator, should not be 0: ");
+            displayMessage("Denominator, (should not be 0): ");
             denom = sc.nextInt();
 
             if (denom != 0)
