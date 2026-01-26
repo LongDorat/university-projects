@@ -3,7 +3,6 @@ package practical_session_02.ex1;
 import java.util.Scanner;
 
 public class Point {
-    private static final Scanner sc = new Scanner(System.in);
     private int x, y;
 
     public Point() {
@@ -16,7 +15,7 @@ public class Point {
         this.y = y;
     }
 
-    public void input() {
+    public void input(Scanner sc) {
         System.out.printf("Please type in the number for x: ");
         x = sc.nextInt();
 

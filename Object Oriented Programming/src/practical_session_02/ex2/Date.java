@@ -3,7 +3,6 @@ package practical_session_02.ex2;
 import java.util.Scanner;
 
 public class Date {
-    private static Scanner sc = new Scanner(System.in);
     private int day, month, year;
 
     public Date() {    }
@@ -47,7 +46,7 @@ public class Date {
         return (day >= 1 && day <= maxDays);
     }
 
-    public void input() {
+    public void input(Scanner sc) {
         do {
             System.out.printf("Please type in the day: ");
             day = sc.nextInt();
