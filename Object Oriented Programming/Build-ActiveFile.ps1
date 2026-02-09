@@ -22,6 +22,8 @@ $pkg = if ($pkgMatch) { $pkgMatch.Matches[0].Groups[1].Value } else {""}
 $cls  = [IO.Path]::GetFileNameWithoutExtension($ActiveFilePath)
 $fqcn = if ($pkg) { "$pkg.$cls" } else { $cls }
 
+Clear-Host
+
 Write-Host "Compiling: $ActiveFilePath"
 & javac -encoding UTF-8 -d $buildPath -sourcepath $srcPath -cp $buildPath $ActiveFilePath
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
