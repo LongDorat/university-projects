@@ -3,7 +3,7 @@ package practical_session_04.ex1;
 import java.util.Scanner;
 
 public class ColorPoint extends Point{
-    String color;
+    private String color;
 
     public ColorPoint()
     {
