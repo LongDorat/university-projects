@@ -1,7 +1,10 @@
 param(
     [Parameter(Mandatory = $true)]
     [String]
-    $ActiveFilePath
+    $ActiveFilePath,
+
+    [String]
+    $InputFile
 )
 
 if (-not $ActiveFilePath){
@@ -29,5 +32,11 @@ Write-Host "Compiling: $ActiveFilePath"
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "Running: $fqcn"
-& java -cp $buildPath $fqcn
+
+if ($InputFile -and (Test-Path $InputFile)) {
+    Get-Content $InputFile | & java -cp $buildPath $fqcn
+} else {
+    & java -cp $buildPath $fqcn
+}
+
 exit $LASTEXITCODE
