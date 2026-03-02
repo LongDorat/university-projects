@@ -33,7 +33,23 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "Running: $fqcn"
 
-if ($InputFile -and (Test-Path $InputFile)) {
+if (-not $InputFile) {
+    Write-Host "No input file provided, do you want to run without input? (Y/n)"
+    $response = Read-Host
+    if ($response -ne "Y" -and $response -ne "y" -and $response -ne "") {
+        Write-Host "Which input file do you want to use? (leave blank to run without input)"
+        $InputFile = Read-Host
+        if (-not $InputFile -or -not (Test-Path $InputFile)) {
+            Write-Host "File path is blank or invalid. Running without input."
+        } else {
+            Write-Host "Using input file: $InputFile"
+        }
+    }
+} elseif (-not (Test-Path $InputFile)) {
+    Write-Warning "Input file '$InputFile' not found, running without input"
+}
+
+if (Test-Path $InputFile) {
     Get-Content $InputFile | & java -cp $buildPath $fqcn
 } else {
     & java -cp $buildPath $fqcn
