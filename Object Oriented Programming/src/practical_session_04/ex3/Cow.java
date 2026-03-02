@@ -5,6 +5,7 @@ public class Cow extends Animal {
         super(breed, coat, color, age, weight);
     }
     
+    @Override
     public void sound() {
         System.out.println("Cow says: Moo!");
     }
