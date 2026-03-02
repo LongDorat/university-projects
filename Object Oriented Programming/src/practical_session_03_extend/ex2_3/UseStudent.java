@@ -1,4 +1,4 @@
-package practical_session_03_custom.ex2_3;
+package practical_session_03_extend.ex2_3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
