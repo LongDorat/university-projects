@@ -1,0 +1,30 @@
+2
+S001
+John Doe
+15
+6
+2000
+john.doe
+password123
+john.doe@email.com
+3
+Math
+A
+Physics
+B+
+Chemistry
+B
+S002
+Jane Smith
+20
+12
+1999
+jane.smith
+mypassword
+jane.smith@email.com
+2
+Programming
+A
+Database
+B+
+jane.smith@email.com
