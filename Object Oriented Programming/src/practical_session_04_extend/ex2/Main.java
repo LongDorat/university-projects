@@ -36,10 +36,23 @@ public class Main {
             System.out.printf("Cost per kilometer: %.2f\n", vehicles[i].costPerKilometer());
         }
 
+        Vehicle mostEfficientVehicle = null;
+        for (Vehicle vehicle : vehicles){
+            if (!(vehicle instanceof Bike)){
+                mostEfficientVehicle = vehicle;
+                break;
+            }
+        }
         for (Vehicle vehicle : vehicles) {
             int distance = 100;
             System.out.printf("Total cost for %d kilometers: %.2f\n", distance, vehicle.costForDistance(distance));
+            if (vehicle.costPerKilometer() < mostEfficientVehicle.costPerKilometer() && !(vehicle instanceof Bike)) {
+                mostEfficientVehicle = vehicle;
+            }
         }
+
+        System.out.println("Most efficient vehicle:");
+        mostEfficientVehicle.display();
 
         System.out.printf("Total number of cars: %d\n", Car.carCount);
         System.out.printf("Total number of bikes: %d\n", Bike.bikeCount);
