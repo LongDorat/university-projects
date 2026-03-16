@@ -1,0 +1,12 @@
+{
+    "name": "University Project Dev Container",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
+    "features": {
+        "ghcr.io/devcontainers/features/java": {
+            "version": "21"
+        },
+        "ghcr.io/devcontainers/features/powershell": {
+            "version": "latest"
+        }
+    }
+}
