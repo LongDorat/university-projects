@@ -6,6 +6,7 @@ This repository contains personal coding exercises and practice problems organiz
 
 - **Computer Architecture**: Assembly language programs and exercises
 - **Object Oriented Programming**: Java applications and practical sessions
+- **Operating System Architecture**: Practical exercises related to OS concepts
 
 ## Usage
 
