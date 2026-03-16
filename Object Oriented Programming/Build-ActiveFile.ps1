@@ -121,6 +121,11 @@ Write-Section "Compiling Source File"
 Write-Host "Source: " -NoNewline -ForegroundColor Gray
 Write-Host $fileName -ForegroundColor White
 
+# Clear the bin directory before compilation
+if (Test-Path $buildPath) {
+    Remove-Item (Join-Path $buildPath "*") -Recurse -Force -ErrorAction SilentlyContinue
+}
+
 & javac -encoding UTF-8 -d $buildPath -sourcepath $srcPath -cp $buildPath $ActiveFilePath
 
 if ($LASTEXITCODE -ne 0) {
