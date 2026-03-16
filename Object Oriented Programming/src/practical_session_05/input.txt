@@ -1,0 +1,63 @@
+3
+INV001
+Nguyen Van A
+20
+5
+2025
+CUS001
+Alice Customer
+Hanoi
+2
+P001
+Notebook
+1
+1
+2025
+2
+150000
+P002
+Pen Set
+15
+3
+2025
+1
+200000
+INV002
+Tran Thi B
+1
+1
+2026
+CUS002
+Bob Customer
+Da Nang
+1
+P003
+Office Chair
+10
+10
+2025
+1
+1500000
+INV003
+Le Van C
+15
+3
+2025
+CUS003
+Charlie Customer
+Ho Chi Minh City
+2
+P004
+USB Drive
+5
+2
+2026
+3
+100000
+P005
+Keyboard
+20
+1
+2026
+1
+600000

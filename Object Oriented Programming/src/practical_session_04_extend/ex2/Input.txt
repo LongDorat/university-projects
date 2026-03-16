@@ -1,0 +1,17 @@
+3
+car
+Toyota Camry
+Blue
+2022
+5
+bike
+Mountain Bike Pro
+Red
+2023
+yes
+motobike
+Harley Davidson
+Black
+2021
+cc
+1200
