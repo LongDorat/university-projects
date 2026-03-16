@@ -1,3 +1,5 @@
+# Git
+.worktrees/*
 # Build paths
 build/*
 bin/*
