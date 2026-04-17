@@ -11,5 +11,14 @@
         "ghcr.io/devcontainers/features/powershell": {
             "version": "latest"
         }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "ms-vscode.powershell",
+                "GitHub.copilot-chat"
+            ]
+        }
     }
 }
