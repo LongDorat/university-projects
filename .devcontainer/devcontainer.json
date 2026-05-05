@@ -2,8 +2,9 @@
     "name": "University Project Dev Container",
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
     "features": {
-        "ghcr.io/devcontainers/features/sshd:1": {
-                "version": "latest"
+        "ghcr.io/devcontainers/features/common-utils": {
+            "version": "latest",
+            "configureZshAsDefaultShell": true
         },
         "ghcr.io/devcontainers/features/java": {
             "version": "21"

@@ -1,0 +1,19 @@
+{
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "version": "2.5.7",
+      "resolved": "ghcr.io/devcontainers/features/common-utils@sha256:dbf431d6b42d55cde50fa1df75c7f7c3999a90cde6d73f7a7071174b3c3d0cc4",
+      "integrity": "sha256:dbf431d6b42d55cde50fa1df75c7f7c3999a90cde6d73f7a7071174b3c3d0cc4"
+    },
+    "ghcr.io/devcontainers/features/java": {
+      "version": "1.8.0",
+      "resolved": "ghcr.io/devcontainers/features/java@sha256:9663ce0219ff85786e87901ce5f0a59f488edd5f99b46015192cda48468b233a",
+      "integrity": "sha256:9663ce0219ff85786e87901ce5f0a59f488edd5f99b46015192cda48468b233a"
+    },
+    "ghcr.io/devcontainers/features/powershell": {
+      "version": "2.0.2",
+      "resolved": "ghcr.io/devcontainers/features/powershell@sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61",
+      "integrity": "sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61"
+    }
+  }
+}
