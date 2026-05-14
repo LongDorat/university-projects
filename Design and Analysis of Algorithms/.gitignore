@@ -1,2 +1,2 @@
 #CMake ignore files
-*/build/*
+**/build/
