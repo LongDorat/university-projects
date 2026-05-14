@@ -1,7 +1,16 @@
-#include <cmath>
-
 class BasicMultiplication
 {
+private:
+    long pow(long base, int exponent)
+    {
+        long result = 1;
+        for (int i = 0; i < exponent; i++)
+        {
+            result *= base;
+        }
+        return result;
+    }
+
 public:
     long multiply(long a, long b)
     {
