@@ -53,6 +53,27 @@ while [ "$#" -gt 0 ]; do
 	esac
 done
 
+random_digits() {
+	local count="$1"
+	local digits=""
+	while [ "${#digits}" -lt "$count" ]; do
+		local hash
+		hash="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
+		digits+="$(printf '%s' "$hash" | tr -cd '0-9')"
+	done
+	printf '%s' "${digits:0:$count}"
+}
+
+random_number_in_range() {
+	local range="$1"
+	local length=$((range + 1))
+	local first_digit
+	first_digit="$((RANDOM % 9 + 1))"
+	local rest
+	rest="$(random_digits "$range")"
+	printf '%s%s' "$first_digit" "$rest"
+}
+
 mkdir -p "$BUILD_DIR"
 cmake -S "$ROOT_DIR" -B "$BUILD_DIR" >/dev/null
 cmake --build "$BUILD_DIR" >/dev/null
@@ -63,14 +84,10 @@ if ! [[ "$r" =~ ^[0-9]+$ ]]; then
 	exit 1
 fi
 
-min=$((10 ** r))
-max=$((9 * min))
-range_size=$((max - min + 1))
-
 sign_a=$((RANDOM % 2))
 sign_b=$((RANDOM % 2))
-num_a=$((RANDOM % range_size + min))
-num_b=$((RANDOM % range_size + min))
+num_a="$(random_number_in_range "$r")"
+num_b="$(random_number_in_range "$r")"
 
 if [ "$positive_only" -eq 1 ]; then
 	sign_a=0
@@ -78,10 +95,10 @@ if [ "$positive_only" -eq 1 ]; then
 fi
 
 if [ "$sign_a" -eq 1 ]; then
-	num_a=$((-num_a))
+	num_a="-$num_a"
 fi
 if [ "$sign_b" -eq 1 ]; then
-	num_b=$((-num_b))
+	num_b="-$num_b"
 fi
 
 "$BUILD_DIR/KarasubatBigInt" "$num_a" "$num_b"

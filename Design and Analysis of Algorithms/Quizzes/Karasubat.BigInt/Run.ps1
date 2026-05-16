@@ -40,12 +40,42 @@ cmake --build $buildDir | Out-Null
 $min = [int64][math]::Pow(10, $Range)
 $max = 9 * $min
 
-$numA = Get-Random -Minimum $min -Maximum ($max + 1)
-$numB = Get-Random -Minimum $min -Maximum ($max + 1)
+function Get-RandomDigits {
+    param([int]$Count)
+
+    $digits = ""
+    $sha256 = [System.Security.Cryptography.SHA256]::Create()
+    $rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+    try {
+        while ($digits.Length -lt $Count) {
+            $bytes = New-Object byte[] 32
+            $rng.GetBytes($bytes)
+            $hash = $sha256.ComputeHash($bytes)
+            $hex = [System.BitConverter]::ToString($hash) -replace "-", ""
+            $digits += ($hex -replace "[^0-9]", "")
+        }
+    } finally {
+        $sha256.Dispose()
+        $rng.Dispose()
+    }
+
+    return $digits.Substring(0, $Count)
+}
+
+function Get-RandomNumberInRange {
+    param([int]$RangeValue)
+
+    $firstDigit = Get-Random -Minimum 1 -Maximum 10
+    $rest = Get-RandomDigits -Count $RangeValue
+    return "$firstDigit$rest"
+}
+
+$numA = Get-RandomNumberInRange -RangeValue $Range
+$numB = Get-RandomNumberInRange -RangeValue $Range
 
 if (-not $PositiveOnly) {
-    if ((Get-Random -Minimum 0 -Maximum 2) -eq 1) { $numA = -$numA }
-    if ((Get-Random -Minimum 0 -Maximum 2) -eq 1) { $numB = -$numB }
+    if ((Get-Random -Minimum 0 -Maximum 2) -eq 1) { $numA = "-$numA" }
+    if ((Get-Random -Minimum 0 -Maximum 2) -eq 1) { $numB = "-$numB" }
 }
 
 & (Join-Path $buildDir "KarasubatBigInt") $numA $numB
