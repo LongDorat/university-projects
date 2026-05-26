@@ -39,6 +39,23 @@ void add_edge(Graph *G, int e, int x, int y)
     G->m++;
 }
 
+int deg(Graph *G, int v)
+{
+    int degree = 0;
+    for (int i = 0; i < G->m; i++)
+    {
+        if (G->Edges[v][i] == 1)
+        {
+            degree++;
+        }
+        else if (G->Edges[v][i] == 2)
+        {
+            degree += 2;
+        }
+    }
+    return degree;
+}
+
 int main()
 {
     Graph G;
@@ -65,6 +82,11 @@ int main()
             }
         }
         printf("\n");
+    }
+
+    for (int v = 1; v <= G.n; v++)
+    {
+        printf("Degree of vertex %d: %d\n", v, deg(&G, v));
     }
 
     return 0;
