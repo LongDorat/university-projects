@@ -14,13 +14,21 @@ typedef struct
     Edge edges[MAX_EDGES];
 } Graph;
 
-void init_graph(Graph* G, int n){
-	G->n = n;
-	G->m = 0;
+void init_graph(Graph *G, int n)
+{
+    G->n = n;
+    G->m = 0;
 }
 
-void add_edge(Graph* G, int x, int y) {
-    if (G->m < MAX_EDGES) {
+void add_edge(Graph *G, int x, int y)
+{
+    if (x < 1 || y < 1 || x > G->n || y > G->n)
+    {
+        return;
+    }
+
+    if (G->m < MAX_EDGES)
+    {
         G->edges[G->m].x = x;
         G->edges[G->m].y = y;
         G->m++;
@@ -38,7 +46,8 @@ int main()
     add_edge(&G, 3, 4);
 
     printf("Graph has %d vertices and %d edges.\n", G.n, G.m);
-    for (int i = 0; i < G.m; i++) {
+    for (int i = 0; i < G.m; i++)
+    {
         printf("Edge from %d to %d\n", G.edges[i].x, G.edges[i].y);
     }
 
