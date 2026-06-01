@@ -56,6 +56,31 @@ int deg(Graph *G, int v)
     return degree;
 }
 
+int* listNeighbors(Graph *G, int v){
+    int* neighbors = (int*)malloc(G->n * sizeof(int));
+    int count = 0;
+    for (int i = 0; i < G->m; i++)
+    {
+        if (G->Edges[v][i] == 1)
+        {
+            for (int j = 1; j <= G->n; j++)
+            {
+                if (G->Edges[j][i] == 1 && j != v)
+                {
+                    neighbors[count++] = j;
+                    break;
+                }
+            }
+        }
+        else if (G->Edges[v][i] == 2)
+        {
+            neighbors[count++] = v;
+        }
+    }
+    neighbors[count] = -1; // Sentinel value to indicate end of list
+    return neighbors;
+}
+
 int main()
 {
     Graph G;
@@ -87,6 +112,18 @@ int main()
     for (int v = 1; v <= G.n; v++)
     {
         printf("Degree of vertex %d: %d\n", v, deg(&G, v));
+    }
+
+    for (int v = 1; v <= G.n; v++)
+    {
+        int* neighbors = listNeighbors(&G, v);
+        printf("Neighbors of vertex %d: ", v);
+        for (int i = 0; neighbors[i] != -1; i++)
+        {
+            printf("%d ", neighbors[i]);
+        }
+        printf("\n");
+        free(neighbors);
     }
 
     return 0;
