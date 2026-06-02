@@ -18,9 +18,9 @@ The MSSQL server is run automatically, you can stop it manually via Docker appli
 
 > [!NOTE]
 > The server is exposed on port 1433, you can use the MSSQL extension for Visual Studio Code to connect to it using the following credentials:
-> - **Server**: localhost,1433
+> - **Server**: mssql,1433
 > - **Username**: sa
-> - **Password**: YourStrong!Passw0rd
+> - **Password**: LocalDevStrong!Passw0rd
 
 ## Disclaimer
 
