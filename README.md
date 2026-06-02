@@ -16,10 +16,10 @@ Each folder contains its own exercises and implementations. Refer to individual 
 
 ```sh
 # Start the MSSQL server using Docker
-docker compose -f .devcontainer/mssql-docker-compose.yml up -d
+docker compose -f .devcontainer/mssql-docker-compose.yml up -d mssql
 
 # To stop the MSSQL server
-docker compose -f .devcontainer/mssql-docker-compose.yml down -d
+docker compose -f .devcontainer/mssql-docker-compose.yml down -d mssql
 ```
 
 > [!NOTE]
