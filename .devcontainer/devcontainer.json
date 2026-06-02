@@ -1,6 +1,13 @@
 {
     "name": "University Project Dev Container",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/university-projects",
+    "runServices": [
+        "devcontainer"
+    ],
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2.5.9": {
             "version": "latest",

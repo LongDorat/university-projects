@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  devcontainer:
+    image: mcr.microsoft.com/devcontainers/base:ubuntu
+    command: sleep infinity
+
+  azuresql:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    environment:
+      - ACCEPT_EULA=1
+      - MSSQL_SA_PASSWORD=LocalDevStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    restart: "no"
