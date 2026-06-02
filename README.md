@@ -14,11 +14,17 @@ Each folder contains its own exercises and implementations. Refer to individual 
 
 ### Running MSSQL server
 
-The MSSQL server is run automatically, you can stop it manually via Docker application/CLI to save on resources when not in use.
+```sh
+# Start the MSSQL server using Docker
+docker compose -f .devcontainer/mssql-docker-compose.yml up -d
+
+# To stop the MSSQL server
+docker compose -f .devcontainer/mssql-docker-compose.yml down -d
+```
 
 > [!NOTE]
 > The server is exposed on port 1433, you can use the MSSQL extension for Visual Studio Code to connect to it using the following credentials:
-> - **Server**: mssql,1433
+> - **Server**: localhost,1433
 > - **Username**: sa
 > - **Password**: LocalDevStrong!Passw0rd
 
