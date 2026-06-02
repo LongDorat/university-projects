@@ -12,15 +12,9 @@ This repository contains personal coding exercises and practice problems organiz
 
 Each folder contains its own exercises and implementations. Refer to individual source files for specific implementations.
 
-### Running Azure SQL server
+### Running MSSQL server
 
-```sh
-    # Start the Azure SQL server using Docker Compose
-    docker compose -f docker-compose.yml up -d azuresql
-
-    # Stop the Azure SQL server
-    docker compose -f docker-compose.yml down -d azuresql
-```
+The MSSQL server is run automatically, you can stop it manually via Docker application/CLI to save on resources when not in use.
 
 > [!NOTE]
 > The server is exposed on port 1433, you can use the MSSQL extension for Visual Studio Code to connect to it using the following credentials:

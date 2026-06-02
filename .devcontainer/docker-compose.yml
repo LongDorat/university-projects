@@ -5,10 +5,10 @@ services:
     image: mcr.microsoft.com/devcontainers/base:ubuntu
     command: sleep infinity
 
-  azuresql:
-    image: mcr.microsoft.com/azure-sql-edge:latest
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2025-latest
     environment:
-      - ACCEPT_EULA=1
+      - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=LocalDevStrong!Passw0rd
     ports:
       - "1433:1433"
