@@ -1,0 +1,11 @@
+{
+	"terminal.integrated.defaultProfile.linux": "zsh",
+	"terminal.integrated.profiles.linux": {
+		"zsh": {
+			"path": "/usr/bin/zsh"
+		},
+		"PowerShell": {
+			"path": "/usr/bin/pwsh"
+		}
+	}
+}
