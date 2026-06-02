@@ -12,6 +12,22 @@ This repository contains personal coding exercises and practice problems organiz
 
 Each folder contains its own exercises and implementations. Refer to individual source files for specific implementations.
 
+### Running MSSQL server
+
+```sh
+# Start the MSSQL server using Docker
+docker compose -f .devcontainer/mssql-docker-compose.yml up -d mssql
+
+# To stop the MSSQL server
+docker compose -f .devcontainer/mssql-docker-compose.yml down -d mssql
+```
+
+> [!NOTE]
+> The server is exposed on port 1433, you can use the MSSQL extension for Visual Studio Code to connect to it using the following credentials:
+> - **Server**: localhost,1433
+> - **Username**: sa
+> - **Password**: LocalDevStrong!Passw0rd
+
 ## Disclaimer
 
 This repository contains my personal solutions to various programming exercises.
