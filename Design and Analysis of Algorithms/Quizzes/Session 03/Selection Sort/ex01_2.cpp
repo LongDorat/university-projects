@@ -35,7 +35,7 @@ int selectionSort(std::vector<int>* arr)
 
 int main()
 {
-    freopen("ex02_inp.txt", "r", stdin);
+    freopen("ex01_2_inp.txt", "r", stdin);
     auto arr = readInput();
     auto comparisonCount = selectionSort(&arr);
 

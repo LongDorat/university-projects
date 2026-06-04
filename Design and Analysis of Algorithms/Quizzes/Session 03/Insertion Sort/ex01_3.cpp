@@ -13,28 +13,33 @@ std::vector<int> readInput()
     return arr;
 }
 
-int bubbleSort(std::vector<int>* arr)
+int insertionSort(std::vector<int>* arr)
 {
     int comparisonCount = 0;
-    int n = arr->size();
-    for (int i = 0; i < n - 1; ++i)
-        for (int j = 0; j < n - i - 1; ++j)
+    for (size_t i = 1; i < arr->size(); ++i)
+    {
+        int key = (*arr)[i];
+        int j = i - 1;
+
+        while (j >= 0 && (*arr)[j] > key)
         {
             comparisonCount++;
-            if (arr->at(j) > arr->at(j + 1))
-            {
-                std::swap((*arr)[j], (*arr)[j + 1]);
-            }
+            (*arr)[j + 1] = (*arr)[j];
+            j--;
         }
+        if (j >= 0) // Count the comparison that fails the while loop
+            comparisonCount++;
 
+        (*arr)[j + 1] = key;
+    }
     return comparisonCount;
 }
 
 int main()
 {
-    freopen("ex01_inp.txt", "r", stdin);
+    freopen("ex01_3_inp.txt", "r", stdin);
     auto arr = readInput();
-    auto comparisonCount = bubbleSort(&arr);
+    auto comparisonCount = insertionSort(&arr);
 
     std::cout << "Number of comparisons: " << comparisonCount << std::endl;
     for (const auto& num : arr)
