@@ -6,4 +6,4 @@ cmake ..
 make
 
 clear
-./BubbleSort
+./SelectionSort
