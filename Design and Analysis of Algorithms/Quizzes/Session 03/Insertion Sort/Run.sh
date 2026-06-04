@@ -1,9 +1,12 @@
 #!/bin/bash
+set -euo pipefail
 
-mkdir build
-cd build
-cmake ..
-make
+if [[ "${1:-}" == "--fresh" ]]; then
+  cmake --fresh -S . -B build
+else
+  cmake -S . -B build
+fi
 
+cmake --build build
 clear
-./InsertionSort
+./build/InsertionSort
