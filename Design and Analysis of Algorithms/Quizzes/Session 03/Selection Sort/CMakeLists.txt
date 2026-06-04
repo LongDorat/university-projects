@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(BubbleSort CXX)
+project(SelectionSort CXX)
 
-add_executable(BubbleSort
+add_executable(SelectionSort
     ex02.cpp
 )
 
