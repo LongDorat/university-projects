@@ -7,14 +7,17 @@ int readInput() {
     return disk;
 }
 
-int towerOfHanoi(int disk, char source, char destination, char auxiliary) {
+int towerOfHanoi(int disk, std::vector<int>& source, std::vector<int>& destination, std::vector<int>& auxiliary) {
     if (disk == 1) {
-        std::cout << "Move disk 1 from " << source << " to " << destination << std::endl;
+        destination.push_back(source.back());
+        source.pop_back();
         return 1;
     }
     int moves = towerOfHanoi(disk - 1, source, auxiliary, destination);
-    std::cout << "Move disk " << disk << " from " << source << " to " << destination << std::endl;
+    destination.push_back(source.back());
+    source.pop_back();
     moves += 1;
+    
     moves += towerOfHanoi(disk - 1, auxiliary, destination, source);
     return moves;
 }
@@ -23,6 +26,20 @@ int main()
 {
     freopen("ex02_inp.txt", "r", stdin);
     int disk = readInput();
-    int numberOfMoves = towerOfHanoi(disk, 'A', 'C', 'B');
+    std::vector<int> A;
+    std::vector<int> B;
+    std::vector<int> C;
+    for (int i = disk; i >= 1; --i) 
+    {
+        A.push_back(i);
+    }
+
+    int numberOfMoves = towerOfHanoi(disk, A, C, B);
+    for (int i = C.size() - 1; i >= 0; --i) 
+    {
+        std::cout << C[i] << " ";
+    }
+    std::cout << std::endl;
+    
     std::cout << "Total moves: " << numberOfMoves << std::endl;
 }
