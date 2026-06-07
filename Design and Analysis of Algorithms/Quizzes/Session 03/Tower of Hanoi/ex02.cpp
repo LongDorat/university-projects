@@ -13,19 +13,20 @@ int main()
 {
     freopen("ex02_inp.txt", "r", stdin);
     int disk = readInput();
-    std::vector<int> A;
-    std::vector<int> B;
-    std::vector<int> C;
+    Pole A{"A", {}};
+    Pole B{"B", {}};
+    Pole C{"C", {}};
     for (int i = disk; i >= 1; --i) 
     {
-        A.push_back(i);
+        A.disks.push_back(i);
     }
 
     TowerOfHanoi hanoi;
     int numberOfMoves = hanoi.run(disk, A, C, B);
-    for (int i = C.size() - 1; i >= 0; --i) 
+    std::cout << "Final state of pole C: ";
+    for (int i = (int)C.disks.size() - 1; i >= 0; --i) 
     {
-        std::cout << C[i] << " ";
+        std::cout << C.disks[i] << " ";
     }
     std::cout << std::endl;
     
