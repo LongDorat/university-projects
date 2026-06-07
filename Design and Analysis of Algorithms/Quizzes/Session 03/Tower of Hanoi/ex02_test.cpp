@@ -2,7 +2,6 @@
 #include <iostream>
 #include <gtest/gtest.h> 
 
-
 TEST(TowerOfHanoiTest, TestMoveDisks) {
     TowerOfHanoi hanoi;
     Pole source{"A", {3, 2, 1}};
@@ -12,14 +11,19 @@ TEST(TowerOfHanoiTest, TestMoveDisks) {
     EXPECT_EQ(numberOfMoves, 7);
 }
 
-
-TEST(TowerOfHanoiTest, TestMoveDisksWithFour) {
+TEST(TowerOfHanoiTest, TestMoveWithSteps)
+{
     TowerOfHanoi hanoi;
-    Pole source{"A", {4, 3, 2, 1}};
+    Pole source{"A", {3, 2, 1}};
     Pole destination{"C", {}};
     Pole auxiliary{"B", {}};
-    int numberOfMoves = hanoi.run(4, source, destination, auxiliary);
-    EXPECT_EQ(numberOfMoves, 15);
+    std::string expectedSteps = "Move disk 1 from A to C\nMove disk 2 from A to B\nMove disk 1 from C to B\nMove disk 3 from A to C\nMove disk 1 from B to A\nMove disk 2 from B to C\nMove disk 1 from A to C\n";
+    
+    testing::internal::CaptureStdout();
+    hanoi.run(3, source, destination, auxiliary);
+    std::string actualSteps = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(actualSteps, expectedSteps);
 }
 
 TEST(TowerOfHanoiTest, TestMoveManyDisks) {
@@ -33,6 +37,6 @@ TEST(TowerOfHanoiTest, TestMoveManyDisks) {
             source.disks.push_back(j);
         }
         int numberOfMoves = hanoi.run(i, source, destination, auxiliary);
-        EXPECT_EQ(numberOfMoves, (1 << i) - 1); // 2^n - 1
+        EXPECT_EQ(numberOfMoves, (1 << i) - 1);
     }
 }
