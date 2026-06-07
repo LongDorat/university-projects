@@ -1,25 +1,12 @@
 #include <iostream>
 #include <vector>
 
+#include "TowerOfHanoi.hpp"
+
 int readInput() {
     int disk;
     std::cin >> disk;
     return disk;
-}
-
-int towerOfHanoi(int disk, std::vector<int>& source, std::vector<int>& destination, std::vector<int>& auxiliary) {
-    if (disk == 1) {
-        destination.push_back(source.back());
-        source.pop_back();
-        return 1;
-    }
-    int moves = towerOfHanoi(disk - 1, source, auxiliary, destination);
-    destination.push_back(source.back());
-    source.pop_back();
-    moves += 1;
-    
-    moves += towerOfHanoi(disk - 1, auxiliary, destination, source);
-    return moves;
 }
 
 int main()
@@ -34,7 +21,8 @@ int main()
         A.push_back(i);
     }
 
-    int numberOfMoves = towerOfHanoi(disk, A, C, B);
+    TowerOfHanoi hanoi;
+    int numberOfMoves = hanoi.run(disk, A, C, B);
     for (int i = C.size() - 1; i >= 0; --i) 
     {
         std::cout << C[i] << " ";
