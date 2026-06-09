@@ -32,12 +32,12 @@ int empty_Q(Queue *Q)
 
 typedef struct
 {
-    int Edge[100][100];
+    int Adjacent[100][100];
     int VertexCount;
     int EdgeCount;
-} VertexList;
+} AdjacencyMatrix;
 
-void BFS(VertexList vertexList, int root, int *mark)
+void BFS(AdjacencyMatrix adjacencyMatrix, int root, int *mark)
 {
     Queue queue;
     make_null_Q(&queue);
@@ -56,20 +56,20 @@ void BFS(VertexList vertexList, int root, int *mark)
         printf("%d ", vertex);
         mark[vertex] = 1;
 
-        for (int i = 1; i <= vertexList.VertexCount; i++)
+        for (int i = 1; i <= adjacencyMatrix.VertexCount; i++)
         {
-            if (vertexList.Edge[vertex][i] == 1 && mark[i] == 0)
+            if (adjacencyMatrix.Adjacent[vertex][i] == 1 && mark[i] == 0)
             {
                 enqueue(&queue, i);
             }
         }
     }
 
-    for (int i = 1; i <= vertexList.VertexCount; i++)
+    for (int i = 1; i <= adjacencyMatrix.VertexCount; i++)
     {
         if (mark[i] == 0)
         {
-            BFS(vertexList, i, mark);
+            BFS(adjacencyMatrix, i, mark);
         }
     }
 }
@@ -78,24 +78,24 @@ int main()
 {
     freopen("input.txt", "r", stdin);
 
-    VertexList vertexList;
-    fscanf(stdin, "%d %d", &vertexList.VertexCount, &vertexList.EdgeCount);
+    AdjacencyMatrix adjacencyMatrix;
+    fscanf(stdin, "%d %d", &adjacencyMatrix.VertexCount, &adjacencyMatrix.EdgeCount);
 
-    for (int i = 0; i < vertexList.EdgeCount; i++)
+    for (int i = 0; i < adjacencyMatrix.EdgeCount; i++)
     {
         int vertex, adjacent;
         fscanf(stdin, "%d %d", &vertex, &adjacent);
-        vertexList.Edge[vertex][adjacent] = 1;
-        vertexList.Edge[adjacent][vertex] = 1;
+        adjacencyMatrix.Adjacent[vertex][adjacent] = 1;
+        adjacencyMatrix.Adjacent[adjacent][vertex] = 1;
     }
 
     int mark[100];
-    for (int i = 0; i < vertexList.VertexCount; i++)
+    for (int i = 0; i < adjacencyMatrix.VertexCount; i++)
     {
         mark[i] = 0;
     }
 
-    BFS(vertexList, 1, mark);
+    BFS(adjacencyMatrix, 1, mark);
 
     return 0;
 }
