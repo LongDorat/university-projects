@@ -34,6 +34,6 @@
             ]
         }
     },
-    // For cosmetic purposes, you can comment the below line if needed
+    // For cosmetic purposes, you can comment the line below if needed
     "postCreateCommand": "pwsh .devcontainer/Install-OhMyPosh.ps1"
 }
