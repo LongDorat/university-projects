@@ -33,5 +33,7 @@
                 "ms-azuretools.vscode-docker"
             ]
         }
-    }
+    },
+    // For cosmetic purposes, you can comment the below line if needed
+    "postCreateCommand": "pwsh .devcontainer/Install-OhMyPosh.ps1"
 }
