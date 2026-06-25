@@ -1,11 +1,11 @@
-Write-Host "Install Oh My Posh"
+Write-Host "Installing Oh My Posh..." -ForegroundColor Blue
 mkdir -p "$HOME/.local/bin"
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.local/bin"
 
-Write-Host "Install Meslo Nerd Font"
+Write-Host "Installing Meslo Nerd Font..." -ForegroundColor Blue
 oh-my-posh font install meslo
 
-Write-Host "Set Amro theme in PowerShell profile"
+Write-Host "Setting Amro theme in PowerShell profile..." -ForegroundColor Blue
 $profilePath = "$HOME/.config/powershell/Microsoft.PowerShell_profile.ps1"
 $ohMyPoshInit = @"
 # Initialize Oh My Posh with Amro theme
@@ -24,9 +24,9 @@ if (!(Select-String -Path $profilePath -Pattern "oh-my-posh init" -Quiet)) {
     Write-Host "Oh My Posh already configured in profile"
 }
 
-Write-Host "Download Amro theme"
+Write-Host "Downloading Amro theme..." -ForegroundColor Blue
 mkdir -p "$HOME/.poshthemes"
 $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/amro.omp.json"
 Invoke-WebRequest -Uri $themeUrl -OutFile "$HOME/.poshthemes/amro.omp.json"
 
-Write-Host "Setup complete! Please restart your terminal or run: oh-my-posh init pwsh --config ~/.poshthemes/amro.omp.json | Invoke-Expression"
+Write-Host "Setup complete! Please restart your terminal or run: oh-my-posh init pwsh --config ~/.poshthemes/amro.omp.json | Invoke-Expression" -ForegroundColor Blue
