@@ -17,7 +17,7 @@
         "ghcr.io/devcontainers/features/sshd:1.1.0": {
             "version": "latest"
         },
-        "ghcr.io/devcontainers/features/docker-in-docker:3.1.0": {
+        "ghcr.io/devcontainers/features/docker-in-docker:4.0.0": {
             "version": "latest",
             "moby": false
         }
@@ -34,6 +34,5 @@
             ]
         }
     },
-    // For cosmetic purposes, you can comment the line below if needed
-    "postCreateCommand": "pwsh .devcontainer/Install-OhMyPosh.ps1"
+    "postCreateCommand": "pwsh scripts/Run-PostCreation.ps1"
 }
