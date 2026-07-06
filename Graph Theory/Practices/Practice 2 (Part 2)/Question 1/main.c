@@ -28,9 +28,42 @@ int DSU(Graph graph)
         // If both vertices are different to each other or both of them are zeros then union them
         if ((group[uv[0]] != group[uv[1]]) || (group[uv[0]] == 0 && group[uv[1]] == 0))
         {
-            if (group[uv[0]] == 0)
+            if (group[uv[0]] == 0 && group[uv[1]] == 0)
+            {
                 group[uv[0]] = uv[0];
-            group[uv[1]] = group[uv[0]];
+                group[uv[1]] = uv[0];
+            }
+            else if (group[uv[0]] == 0 && group[uv[1]] != 0)
+            {
+                group[uv[0]] = group[uv[1]];
+            }
+            else if (group[uv[0]] != 0 && group[uv[1]] == 0)
+            {
+                group[uv[1]] = group[uv[0]];
+            }
+            else
+            {
+                int maxGroup;
+                int minGroup;
+                if (group[uv[0]] > group[uv[1]])
+                {
+                    maxGroup = group[uv[0]];
+                    minGroup = group[uv[1]];
+                }
+                else
+                {
+                    maxGroup = group[uv[1]];
+                    minGroup = group[uv[0]];
+                }
+
+                for (int i = 1; i <= graph.VertexCount; i++)
+                {
+                    if (group[i] == maxGroup)
+                    {
+                        group[i] = minGroup;
+                    }
+                }
+            }
         }
         else
         {
