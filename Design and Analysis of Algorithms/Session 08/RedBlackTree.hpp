@@ -135,6 +135,171 @@ private:
         root->color = BLACK;
     }
 
+    void transplant(Node *u, Node *v)
+    {
+        if (u->parent == NIL)
+        {
+            root = v;
+        }
+        else if (u == u->parent->left)
+        {
+            u->parent->left = v;
+        }
+        else
+        {
+            u->parent->right = v;
+        }
+        v->parent = u->parent;
+    }
+
+    Node* minimum(Node *x)
+    {
+        while (x->left != NIL)
+        {
+            x = x->left;
+        }
+        return x;
+    }
+
+    Node* search(int value)
+    {
+        Node* current = root;
+        while (current != NIL && current->value != value)
+        {
+            current = (value < current->value) ? current->left : current->right;
+        }
+        return current;
+    }
+
+    void fixDelete(Node* x)
+    {
+        while (x != root && x->color == BLACK)
+        {
+            if (x == x->parent->left)
+            {
+                Node* sibling = x->parent->right;
+                if (sibling->color == RED)
+                {
+                    sibling->color = BLACK;
+                    x->parent->color = RED;
+                    leftRotation(x->parent);
+                    sibling = x->parent->right;
+                }
+                if (sibling->left->color == BLACK && sibling->right->color == BLACK)
+                {
+                    sibling->color = RED;
+                    x = x->parent;
+                }
+                else
+                {
+                    if (sibling->right->color == BLACK)
+                    {
+                        sibling->left->color = BLACK;
+                        sibling->color = RED;
+                        rightRotation(sibling);
+                        sibling = x->parent->right;
+                    }
+                    sibling->color = x->parent->color;
+                    x->parent->color = BLACK;
+                    sibling->right->color = BLACK;
+                    leftRotation(x->parent);
+                    x = root;
+                }
+            }
+            else
+            {
+                Node* sibling = x->parent->left;
+                if (sibling->color == RED)
+                {
+                    sibling->color = BLACK;
+                    x->parent->color = RED;
+                    rightRotation(x->parent);
+                    sibling = x->parent->left;
+                }
+                if (sibling->right->color == BLACK && sibling->left->color == BLACK)
+                {
+                    sibling->color = RED;
+                    x = x->parent;
+                }
+                else
+                {
+                    if (sibling->left->color == BLACK)
+                    {
+                        sibling->right->color = BLACK;
+                        sibling->color = RED;
+                        leftRotation(sibling);
+                        sibling = x->parent->left;
+                    }
+                    sibling->color = x->parent->color;
+                    x->parent->color = BLACK;
+                    sibling->left->color = BLACK;
+                    rightRotation(x->parent);
+                    x = root;
+                }
+            }
+        }
+        x->color = BLACK;
+    }
+
+    void remove(Node* z)
+    {
+        Node* y = z;
+        Color yOriginalColor = y->color;
+        Node* x;
+
+        if (z->left == NIL)
+        {
+            x = z->right;
+            transplant(z, z->right);
+        }
+        else if (z->right == NIL)
+        {
+            x = z->left;
+            transplant(z, z->left);
+        }
+        else
+        {
+            y = minimum(z->right);
+            yOriginalColor = y->color;
+            x = y->right;
+
+            if (y->parent == z)
+            {
+                x->parent = y;
+            }
+            else
+            {
+                transplant(y, y->right);
+                y->right = z->right;
+                y->right->parent = y;
+            }
+
+            transplant(z, y);
+            y->left = z->left;
+            y->left->parent = y;
+            y->color = z->color;
+        }
+
+        delete z;
+
+        if (yOriginalColor == BLACK)
+        {
+            fixDelete(x);
+        }
+    }
+
+    void printTree(Node* node, int  depth = 0, std::string prefix = "") const
+    {
+        if (node == NIL)
+        {
+            return;
+        }
+
+        printTree(node->right, depth + 1, "    " + prefix);
+        std::cout << prefix << (node->color == RED ? "R" : "B") << ":" << node->value << std::endl;
+        printTree(node->left, depth + 1, "    " + prefix);
+    }
+
 public:
     RedBlackTree()
     {
@@ -173,5 +338,20 @@ public:
         z->color = RED;
 
         fixInsertion(z);
+    }
+
+    void deleteNode(int value)
+    {
+        Node* z = search(value);
+        if (z != NIL)
+        {
+            remove(z);
+        }
+    }
+
+    void print()
+    {
+        printTree(root);
+        std::cout << "====================" << std::endl;
     }
 };

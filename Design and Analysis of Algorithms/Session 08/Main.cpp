@@ -16,6 +16,13 @@ int main()
         std::cin >> value;
         tree.insertValue(value);
     }
+    tree.print();
+
+    tree.insertValue(20);
+    tree.print();
+
+    tree.deleteNode(6); // exists in the tree
+    tree.print();
 
     return 0;
 }
