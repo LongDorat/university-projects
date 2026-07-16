@@ -31,7 +31,8 @@
                 "KylinIdeTeam.cmake-intellisence",
                 "ms-vscode.powershell",
                 "ms-mssql.mssql",
-                "ms-azuretools.vscode-docker"
+                "ms-azuretools.vscode-docker",
+                "EditorConfig.EditorConfig"
             ]
         }
     },
