@@ -1,4 +1,1 @@
-cmake_minimum_required(VERSION 3.15)
-project(Question_4 C)
-
-add_executable(Question_4 main.c)
+add_subdirectory_executable(Question_4-7 main.c)

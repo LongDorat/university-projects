@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.15)
-project(Question_1 C)
+add_subdirectory_executable(Question_1 main.c)
 
-add_executable(Question_1 main.c)
-
-configure_file(graph.txt graph.txt COPYONLY)
+add_subdirectory_files(Question_1 graph.txt)
