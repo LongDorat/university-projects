@@ -49,7 +49,7 @@ int calculate_degree(Graph *G, int vertex)
 
 int main()
 {
-    // freopen("graph.txt", "r", stdin);
+    freopen("graph.txt", "r", stdin);
     Graph G = read_graph();
 
     // DEBUG
