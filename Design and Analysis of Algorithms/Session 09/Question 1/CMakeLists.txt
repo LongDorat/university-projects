@@ -1,0 +1,1 @@
+add_subdirectory_executable(Question_1 Main.cpp)
