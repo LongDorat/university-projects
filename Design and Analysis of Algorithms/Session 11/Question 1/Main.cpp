@@ -4,14 +4,14 @@
 
 int findCompatibles(const std::vector<std::pair<int, int>>& arr)
 {
-    int count = 0;
+    int count = 1;
     int highest = arr[0].second;
     for (size_t i = 0; i < arr.size(); ++i)
     {
         if (arr[i].first >= highest)
         {
             ++count;
-            highest = std::max(highest, arr[i].second);
+            highest = arr[i].second;
         }
     }
     return count;
