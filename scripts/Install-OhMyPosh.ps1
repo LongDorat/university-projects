@@ -1,22 +1,44 @@
 Write-Host "Installing Oh My Posh..." -ForegroundColor Blue
-mkdir -p "$HOME/.local/bin"
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$HOME/.local/bin"
+$localBinPath = "$HOME/.local/bin"
+mkdir -p "$localBinPath"
+
+# Add the local bin directory to $PATH for the current session
+if ($env:PATH -notlike "*$localBinPath*") {
+    $env:PATH = "${localBinPath}:$env:PATH"
+    Write-Host "Added $localBinPath to PATH for the current session"
+} else {
+    Write-Host "$localBinPath is already on PATH"
+}
+
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$localBinPath"
 
 Write-Host "Installing Meslo Nerd Font..." -ForegroundColor Blue
 oh-my-posh font install meslo
 
 Write-Host "Setting Amro theme in PowerShell profile..." -ForegroundColor Blue
 $profilePath = "$HOME/.config/powershell/Microsoft.PowerShell_profile.ps1"
+
+# Create profile directory/file if they don't exist
+mkdir -p "$HOME/.config/powershell"
+New-Item -Path $profilePath -ItemType File -Force | Out-Null
+
+# Persist the local bin directory on PATH in the profile
+$pathExport = @"
+# Add local bin to PATH
+`$env:PATH = "${localBinPath}:`$env:PATH"
+"@
+if (!(Select-String -Path $profilePath -Pattern ([regex]::Escape($localBinPath)) -Quiet)) {
+    Add-Content -Path $profilePath -Value $pathExport
+    Write-Host "Added $localBinPath to PATH in PowerShell profile"
+} else {
+    Write-Host "PATH already configured in profile"
+}
+
+# Append the Oh My Posh init to the profile if it doesn't already exist
 $ohMyPoshInit = @"
 # Initialize Oh My Posh with Amro theme
 oh-my-posh init pwsh --config ~/.poshthemes/amro.omp.json | Invoke-Expression
 "@
-
-# Create profile directory if it doesn't exist
-mkdir -p "$HOME/.config/powershell"
-New-Item -Path "$HOME/.config/powershell/" -Name "Microsoft.PowerShell_profile.ps1" -ItemType File
-
-# Append to profile if the line doesn't already exist
 if (!(Select-String -Path $profilePath -Pattern "oh-my-posh init" -Quiet)) {
     Add-Content -Path $profilePath -Value $ohMyPoshInit
     Write-Host "Added Oh My Posh initialization to PowerShell profile"
