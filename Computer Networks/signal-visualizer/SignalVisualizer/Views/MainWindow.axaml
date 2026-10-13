@@ -1,0 +1,151 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SignalVisualizer.ViewModels"
+        xmlns:services="using:SignalVisualizer.Services"
+        xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SignalVisualizer.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="Signal Visualizer"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        Loaded="OnWindowLoaded">
+
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.45" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+
+        <Grid
+            x:Name="MainGrid"
+            ColumnDefinitions="*, *">
+            
+            <Grid
+                x:Name="UserInputGrid"
+                RowDefinitions="*, Auto, *, Auto"
+                RowSpacing="10"
+                Margin="10">
+
+                <TextBox
+                    x:Name="InputTextBox"
+                    Text="{Binding UserInput, Mode=TwoWay}"
+                    Grid.Row="0"
+                    Classes="card"
+                    PlaceholderText="Enter your message here..."
+                    AcceptsReturn="True" />
+
+                <Grid
+                    x:Name="OutputOptionsGrid"
+                    Grid.Row="1"
+                    ColumnDefinitions="*, *, 2*"
+                    ColumnSpacing="10">
+
+                    <RadioButton
+                        x:Name="MsbFirstButton"
+                        Grid.Column="0"
+                        Classes="segmented"
+                        GroupName="BitOrder"
+                        Content="MSB First"
+                        IsChecked="{Binding IsMsbFirst, Mode=TwoWay}" />
+
+                    <RadioButton
+                        x:Name="LsbFirstButton"
+                        Grid.Column="1"
+                        Classes="segmented"
+                        GroupName="BitOrder"
+                        Content="LSB First"
+                        IsChecked="{Binding IsLsbFirst, Mode=TwoWay}" />
+
+                    <ComboBox
+                        x:Name="EncodingComboBox"
+                        Grid.Column="2"
+                        Classes="card"
+                        PlaceholderText="Select Encoding"
+                        HorizontalAlignment="Stretch"
+                        SelectedIndex="{Binding EncodingIndex, Mode=TwoWay}">
+                        <ComboBoxItem Content="UTF-8" />
+                        <ComboBoxItem Content="UTF-16" />
+                        <ComboBoxItem Content="ASCII" />
+                    </ComboBox>
+                </Grid>
+
+                <TextBox
+                    x:Name="OutputTextBox"
+                    Text="{Binding BinaryOutput, Mode=OneWay}"
+                    Grid.Row="2"
+                    Classes="card"
+                    PlaceholderText="Binary output will appear here..."
+                    TextWrapping="Wrap"
+                    IsReadOnly="True" />
+
+                <Grid
+                    x:Name="ByteEndiannessGrid"
+                    Grid.Row="3"
+                    ColumnDefinitions="*, *"
+                    ColumnSpacing="10">
+
+                    <TextBlock
+                        x:Name="ByteEndiannessLabel"
+                        Grid.Column="0"
+                        Text="Byte Endianness"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        ToolTip.Tip="Only available for UTF-16 and higher encoder" />
+
+                    <ComboBox
+                        x:Name="ByteEndiannessComboBox"
+                        Grid.Column="1"
+                        Classes="card"
+                        PlaceholderText="Select Byte Endianness"
+                        HorizontalAlignment="Stretch"
+                        SelectedIndex="{Binding ByteEndianIndex, Mode=TwoWay}">
+                        <ComboBoxItem Content="Little Endian" />
+                        <ComboBoxItem Content="Big Endian" />
+                    </ComboBox>
+                </Grid>
+            </Grid>
+
+            <Grid
+                x:Name="SignalVisualizationGrid"
+                Grid.Column="1"
+                RowDefinitions="Auto, *"
+                Margin="10"
+                RowSpacing="10">
+
+                <ComboBox
+                    x:Name="SignalTypeComboBox"
+                    Grid.Row="0"
+                    Classes="card"
+                    PlaceholderText="Select Signal Type"
+                    HorizontalAlignment="Stretch"
+                    ItemsSource="{Binding Generators}"
+                    SelectedItem="{Binding SelectedGenerator, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="services:IGraphGenerator">
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Border
+                    x:Name="SignalCanvasBorder"
+                    Grid.Row="1"
+                    Classes="canvas-card">
+                    <ScottPlot:AvaPlot
+                        x:Name="SignalPlot"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Panel>
+
+</Window>
