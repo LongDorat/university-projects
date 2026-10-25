@@ -10,7 +10,18 @@ if ($env:PATH -notlike "*$localBinPath*") {
     Write-Host "$localBinPath is already on PATH"
 }
 
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "$localBinPath"
+# Download and run the Oh My Posh installer script
+Invoke-WebRequest -Uri https://ohmyposh.dev/install.sh -OutFile install.sh
+try {
+    bash install.sh -- -d "$localBinPath"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Oh My Posh installer exited with code $LASTEXITCODE"
+    }
+} catch {
+    Write-Host "Failed to install Oh My Posh: $_" -ForegroundColor Red
+    exit 1
+}
+Remove-Item install.sh -Force
 
 Write-Host "Installing Meslo Nerd Font..." -ForegroundColor Blue
 oh-my-posh font install meslo
